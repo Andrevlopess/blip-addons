@@ -101,6 +101,7 @@ export type BlipFlowBlock = {
   $conditionOutputs: BlipBlockOutputCondition[];
   $contentActions: BlipContentAction[];
   addonsSettings?: any;
+  addonsComments?: any;
 };
 
 export type BlipAction = {
