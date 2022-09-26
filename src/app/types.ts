@@ -76,6 +76,7 @@ export type LoopBlocksDetail = {
 export type Tag = {
   name: string;
   color: string;
+  isActive: boolean;
 };
 
 export type ConditionActionProblemDetail = {
@@ -167,6 +168,10 @@ export type BlipTag = {
   id: string;
   label: string;
 };
+
+export type PaletteColor = {
+  hex: string;
+}
 
 export type BlipFlowBlockPosition = {
   top: string;
