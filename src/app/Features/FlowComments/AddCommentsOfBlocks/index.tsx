@@ -4,14 +4,10 @@ import { v4 as uuid } from 'uuid';
 import { BaseFeature } from '../../BaseFeature';
 import { AddCommentsSidebar } from './AddCommentsSidebar';
 import {
-  getFlowBlockById,
   interceptFunction,
   getAllFlowBlock,
   getBlockById,
-  getContrastColor,
-  hexToRgb,
-  getSelectedNodes,
-  getFlow
+  getSelectedNodes
 } from '~/Utils';
 import { AddCommentOption } from './AddCommentOption';
 import * as Constants from './Constants';

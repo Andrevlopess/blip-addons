@@ -11,6 +11,6 @@ export * from './EditBlocks';
 export * from './RemoveGlobalTrackings';
 export * from './FilterBots';
 export * from './AutoTag';
-export * from './FlowComments/AddCommentsSidebar';
+export * from './FlowComments';
 export * from './CleanEnvironment';
 //export * from './ReplaceVariable';

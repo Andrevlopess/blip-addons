@@ -3,7 +3,7 @@ import {
   createConfirmationAlert,
   getBlocks,
   removeOverlay,
-  showSuccessToast,
+  showSuccessToast
 } from '~/Utils';
 import { Paragraph } from '@components';
 import { BlipAction, BlipFlowBlock, BlipCondiction, InconsistencyModel } from '../../../types';

@@ -30,7 +30,7 @@ export const FlowCommentsSidebar = ({
   onEditComment,
 }: FlowCommentsSidebarProps): JSX.Element => {
   const [comments, setComments] = React.useState(commentsObj);
-  const [isEditingCommentsArray, setIsEditingCommentsArray] = React.useState();
+  const [isEditingCommentsArray, setIsEditingCommentsArray] = React.useState(new Array(Object.values(commentsObj).length).fill(false));
 
   const removeLine = (index: string): void => {
     const updatedComments = comments.filter((_, i) => i !== index); // Mudar isso aquiiiiiiiii
@@ -73,22 +73,37 @@ export const FlowCommentsSidebar = ({
         <div className="sidebar-content-body">
           <Block paddingX={2.5} paddingY={1}>
             <p>Teste</p>
+            <p>{isEditingCommentsArray}</p>
           </Block>
 
           <Block width="100%">
             {Object.values(comments).map((field: string, index: number) => {
               return (
                 <HorizontalStack marginTop={2} key={field}>
-                  <BdsInput
+                  {/*<BdsInput
                     value={comments[field]}
-                    disabled={true}
-                    //onChange={(e) => removeLine(field)}
-                    //onSubmit={(e) => removeLine(field)}
+                    //disabled={true}
+                    onChange={() => removeLine(field)}
+                    onSubmit={() => removeLine(field)}
                     label="Insira o seu comentário"
                     type="text"
                     isTextarea={true}
-                    rows={10}
-                  />
+                    rows={5}
+              />*/}
+                  { isEditingCommentsArray[index] ? 
+                    <p>{comments[field]}</p> :
+                    <BdsInput
+                    value={comments[field]}
+                    //disabled={true}
+                    onChange={() => removeLine(field)}
+                    onSubmit={() => removeLine(field)}
+                    label="Insira o seu comentário"
+                    type="text"
+                    isTextarea={true}
+                    rows={5}
+              />
+
+                  }
                   <Flex className="justify-between">
                     <div style={{ alignSelf: 'center', cursor: 'pointer' }}>
                       <BdsIcon
