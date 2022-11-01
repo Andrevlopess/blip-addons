@@ -34,9 +34,11 @@ export class AddFlowCommentsSidebar extends BaseFeature {
     return document.getElementById(BLIPS_BUTTON_ID);
   }
 
-  private getComments(): any {
+  private getComments(): Array<Array<string>> {
     const onboardingBlock = getBlockById('onboarding');
-    return onboardingBlock.addonsComments;
+    const commentsObj = onboardingBlock?.addonsComments ? onboardingBlock.addonsComments : {};
+    return Object.entries(commentsObj);
+    //return commentsObj;
   }
 
   private onRemoveComment(updatedComments: any, removedComment: any): void {
@@ -58,14 +60,14 @@ export class AddFlowCommentsSidebar extends BaseFeature {
     if (!this.getSidebar()) {
       // Creates and append the sidebar to the dom
       const blipsSidebar = document.createElement('div');
-      const commentsObj = this.getComments();
+      const commentsArray = this.getComments();
 
       console.log('>> Comentários carregados: ');
-      console.log(commentsObj);
+      console.log(commentsArray);
 
       blipsSidebar.setAttribute('id', BLIPS_SIDEBAR_ID);
       ReactDOM.render(
-        <FlowCommentsSidebar onClose={this.closeSidebar} commentsObj={commentsObj} onRemoveComment={this.onRemoveComment} onEditComment={this.onEditComment}/>,
+        <FlowCommentsSidebar onClose={this.closeSidebar} commentsObj={commentsArray} onRemoveComment={this.onRemoveComment} onEditComment={this.onEditComment}/>,
         blipsSidebar
       );
 

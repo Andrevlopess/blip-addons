@@ -60,24 +60,25 @@ export class AddCommentsOfBlocks extends BaseFeature {
   // Parei aqui
   private onEditComment = (text: string): void => {
     console.log('Recebido comentário com o texto: ' + text)
-    for(const id of this.idsList){
-      const block = getBlockById(id);
-      const onboardingBlock = getBlockById('onboarding');
-      const newCommentId = uuid();
+    
+    const onboardingBlock = getBlockById('onboarding');
+    const newCommentId = uuid();
 
+    if(onboardingBlock.addonsComments) {
+      onboardingBlock.addonsComments[newCommentId] = text;
+    } else {
+      onboardingBlock.addonsComments = {};
+      onboardingBlock.addonsComments[newCommentId] = text;
+    }
+
+    for(const id of this.idsList){
+      const block = getBlockById(id);   
       if(block.addonsSettings && block.addonsSettings.commentsIdList){
         block.addonsSettings.commentsIdList.push(newCommentId);
       } else {
         block.addonsSettings = {
           ...block.addonsSettings, commentsIdList: [newCommentId]
         };
-      }
-
-      if(onboardingBlock.addonsComments) {
-        onboardingBlock.addonsComments[newCommentId] = text;
-      } else {
-        onboardingBlock.addonsComments = {};
-        onboardingBlock.addonsComments[newCommentId] = text;
       }
     }
   };

@@ -1,6 +1,6 @@
 import { BdsButton } from 'blip-ds/dist/blip-ds-react';
 import * as React from 'react';
-import { Block, Input } from '~/Components';
+import { Block, Input, HorizontalStack, Paragraph } from '~/Components';
 import { showSuccessToast } from '~/Utils';
 
 export type AddCommentsSidebarProps = {
@@ -33,7 +33,7 @@ export const AddCommentsSidebar = ({
               maxLength={50}
               type="text"
               name="nodeName"
-              value="Estilos do Bloco"
+              value="Editor de comentários"
               readOnly
             />
 
@@ -51,23 +51,28 @@ export const AddCommentsSidebar = ({
 
         <div className="sidebar-content-body">
           <Block paddingX={2.5} paddingY={1}>
+            <Paragraph>
+              Insira o seu comentário abaixo. <br/>
+              O comentário deve conter apenas texto.
+            </Paragraph>
             <div className="ml2" style={{ marginTop: '4px' }}>
               <Input
                 value={textComment}
                 onChange={(e) => setTextComment(e.target.value)}
-                onSubmit={(e) => setTextComment(e.target.value)}
+                //onSubmit={(e) => setTextComment(e.target.value)}
                 label="Insira o seu comentário"
                 type="text"
                 isTextarea={true}
-                rows={10}
+                rows={30}
               />
             </div>
           </Block>
-          <Block paddingX={2.5} marginTop={2}>
+
+          <HorizontalStack marginTop={2} style={{ paddingLeft: '2rem' }}>
             <BdsButton type="submit" variant="primary" onClick={handleSubmit}>
               Salvar
             </BdsButton>
-          </Block>
+          </HorizontalStack>
         </div>
       </div>
     </>

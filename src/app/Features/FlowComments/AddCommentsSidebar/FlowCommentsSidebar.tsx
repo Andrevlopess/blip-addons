@@ -30,7 +30,6 @@ export const FlowCommentsSidebar = ({
   onEditComment,
 }: FlowCommentsSidebarProps): JSX.Element => {
   const [comments, setComments] = React.useState(commentsObj);
-  const [isEditingCommentsArray, setIsEditingCommentsArray] = React.useState(new Array(Object.values(commentsObj).length).fill(false));
 
   const removeLine = (index: string): void => {
     const updatedComments = comments.filter((_, i) => i !== index); // Mudar isso aquiiiiiiiii
@@ -38,6 +37,16 @@ export const FlowCommentsSidebar = ({
     setComments(updatedComments);
     onRemoveComment(updatedComments, removedComment);
     showSuccessToast('Comentário salvo com sucesso!');
+  };
+
+  const editComment = (commentId: string, text: string): void => {
+    console.log(`Comentário ${commentId} editado*`)
+    console.log(`Texto: ${text}`)
+    //comments[commentId]
+    //setComments()
+    //setComments(updatedComments);
+    //onRemoveComment(updatedComments, removedComment);
+    //showSuccessToast('Comentário salvo com sucesso!');
   };
 
   return (
@@ -71,52 +80,34 @@ export const FlowCommentsSidebar = ({
         </div>
 
         <div className="sidebar-content-body">
-          <Block paddingX={2.5} paddingY={1}>
-            <p>Teste</p>
-            <p>{isEditingCommentsArray}</p>
-          </Block>
 
           <Block width="100%">
-            {Object.values(comments).map((field: string, index: number) => {
+            {comments.map((comment, index) => {
               return (
-                <HorizontalStack marginTop={2} key={field}>
-                  {/*<BdsInput
-                    value={comments[field]}
-                    //disabled={true}
-                    onChange={() => removeLine(field)}
-                    onSubmit={() => removeLine(field)}
-                    label="Insira o seu comentário"
+                <HorizontalStack marginTop={2} key={comment[0]} style={{ padding: '1rem'}}>
+                  <Input
+                    value={comment[1]}
+                    onSubmit={(c) => (comment[1] = c.target.value)}
+                    onChange={(c) => (comment[1] = c.target.value)}
+                    label={`Comentário ${index + 1}`}
                     type="text"
                     isTextarea={true}
-                    rows={5}
-              />*/}
-                  { isEditingCommentsArray[index] ? 
-                    <p>{comments[field]}</p> :
-                    <BdsInput
-                    value={comments[field]}
-                    //disabled={true}
-                    onChange={() => removeLine(field)}
-                    onSubmit={() => removeLine(field)}
-                    label="Insira o seu comentário"
-                    type="text"
-                    isTextarea={true}
-                    rows={5}
-              />
-
-                  }
-                  <Flex className="justify-between">
-                    <div style={{ alignSelf: 'center', cursor: 'pointer' }}>
+                    rows={10}
+                    cols={45}
+                  />
+                  <Flex className="justify-between" alignItems='baseline'>
+                    <div style={{ cursor: 'pointer' }}>
                       <BdsIcon
                         name="trash"
                         color="red"
-                        onClick={() => removeLine(field)}
+                        onClick={() => removeLine(comment[0])}
                       />
                     </div>
-                    <div style={{ alignSelf: 'center', cursor: 'pointer' }}>
+                    <div style={{ cursor: 'pointer' }}>
                       <BdsIcon
-                        name="edit"
+                        name="save-disk"
                         color="black"
-                        onClick={() => removeLine(field)}
+                        onClick={() => editComment(comment[0], comment[1])}
                       />
                     </div>
                   </Flex>
@@ -179,4 +170,56 @@ comments.map((field, index) => {
                   </BlipAccordionItem>
                 );
               })
+*/
+
+/*
+<Block width="100%">
+            {Object.values(comments).map((field: string, index: number) => {
+              return (
+                <HorizontalStack marginTop={2} key={field}>
+                  {<BdsInput
+                    value={comments[field]}
+                    //disabled={true}
+                    onChange={() => removeLine(field)}
+                    onSubmit={() => removeLine(field)}
+                    label="Insira o seu comentário"
+                    type="text"
+                    isTextarea={true}
+                    rows={5}
+              />}
+                  { isEditingCommentsArray[index] ? 
+                    <p>{comments[field]}</p> :
+                    <BdsInput
+                    value={comments[field]}
+                    //disabled={true}
+                    onChange={() => removeLine(field)}
+                    onSubmit={() => removeLine(field)}
+                    label="Insira o seu comentário"
+                    type="text"
+                    isTextarea={true}
+                    rows={5}
+              />
+
+                  }
+                  <Flex className="justify-between">
+                    <div style={{ alignSelf: 'center', cursor: 'pointer' }}>
+                      <BdsIcon
+                        name="trash"
+                        color="red"
+                        onClick={() => removeLine(field)}
+                      />
+                    </div>
+                    <div style={{ alignSelf: 'center', cursor: 'pointer' }}>
+                      <BdsIcon
+                        name="edit"
+                        color="black"
+                        onClick={() => removeLine(field)}
+                      />
+                    </div>
+                  </Flex>
+                </HorizontalStack>
+              );
+            })}
+          </Block>
+
 */
