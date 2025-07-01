@@ -30,22 +30,25 @@ export const CleanButton = ({
   };
 
   return (
-    <li>
-      <BdsTooltip
-        className="cursor-pointer"
-        position="right-center"
-        tooltipText="Limpar ambiente"
-        onClick={handleClick}
-      >
-        <div className="builder-icon-bg flex justify-center items-center">
-          <BdsIcon
-            size="medium"
-            class="builder-icon bds-icon bds-icon__size--medium"
-            theme="outline"
-            name={isActive ? ACTIVE_ICON : INACTIVE_ICON}
-          />
-        </div>
-      </BdsTooltip>
-    </li>
+    <BdsTooltip
+      className="cursor-pointer"
+      position="right-center"
+      tooltipText="Limpar ambiente"
+      onClick={handleClick}
+    >
+      <div className="flex justify-center items-center" style={{
+        height: '48px',
+        width: '48px',
+        opacity: '0.8',
+        backgroundColor: '#1a2437'
+      }}>
+        <BdsIcon
+          size="medium"
+          class="builder-icon bds-icon bds-icon__size--medium"
+          theme="outline"
+          name={isActive ? ACTIVE_ICON : INACTIVE_ICON}
+        />
+      </div>
+    </BdsTooltip>
   );
 };
